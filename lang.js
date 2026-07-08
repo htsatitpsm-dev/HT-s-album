@@ -39,6 +39,7 @@ const LANG = {
         dtmed: "✦แนวคิดนวัตกรรมทางการแพทย์",
         obsci: "✦สัมนาทางวิทยาศาสตร์",
         bsinno: "✦พื้นฐานนวัตกรรม",
+        drone4: "หนูน้อยเจ้าเวหา 4",
     },
     en: {
         head: "HT's Album",
@@ -80,6 +81,7 @@ const LANG = {
         dtmed: "✦Medical Innovation Concepts",
         obsci: "✦Scientific Seminars",
         bsinno: "✦Fundamentals of Innovation",
+        drone4: "Drone Mission 4",
     }
 };
 
