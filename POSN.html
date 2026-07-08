@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HT's Album</title>
+
+<style>
+:root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --text: #111;
+    --subtext: #555;
+    --hover: #f1f1f1;
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+body.dark {
+    --bg: #0f0f0f;
+    --card: #1a1a1a;
+    --text: #f5f5f5;
+    --subtext: #aaa;
+    --hover: #2a2a2a;
+    --shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+    overflow-x: hidden;
+}
+
+/* ===== Top bar ===== */
+.topbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 16px 20px;
+    display: flex;
+    gap: 16px;
+    z-index: 1000;
+}
+
+.menu-btn, .dark-btn {
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ===== Side menu ===== */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 270px;
+    height: 100vh;
+    background: var(--card);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+    padding: 30px 20px;
+    transition: right 0.35s cubic-bezier(.4,0,.2,1);
+    z-index: 999;
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+}
+.side-menu.active { right: 0; }
+.side-menu h3 { margin-top: 0; margin-bottom: 25px; font-weight: 600; }
+
+.menu-item, .menu-link { margin-bottom: 10px; }
+.menu-header, .menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+    text-decoration: none;
+    color: var(--text);
+}
+.menu-header:hover, .menu-link:hover { background: var(--hover); }
+
+.menu-left { display: flex; align-items: center; gap: 10px; }
+.icon { font-size: 18px; }
+.chevron { font-size: 18px; color: var(--subtext); transition: transform 0.3s ease; }
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    padding-left: 20px;
+}
+.submenu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    margin-top: 6px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--subtext);
+    font-size: 14px;
+}
+.submenu a:hover { background: var(--hover); }
+
+/* ===== BANNER ===== */
+.banner{
+    width: 100%;
+    height: 330px;              
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url("posn.png");
+    background-repeat: no-repeat;
+    background-size: contain;   
+    background-position: center;  
+    background-color: #ffffff;   
+}
+
+.banner::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+}
+.banner h1{
+    color:#fff;
+    font-size:38px;
+    z-index:1;
+    letter-spacing:2px;
+}
+
+/* ===== CARD SECTION ===== */
+.container{
+    max-width:1200px;
+    margin:40px auto;
+    padding:0 20px;
+}
+.grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap:20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+}
+
+.card{
+    background-color: white !important;
+    background: var(--card);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover{
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+}
+
+.card-link{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:16px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.card-body h3{
+    color: #000000 !important;
+    font-size:15px;
+    line-height:1.4;
+    color: var(--text);
+}
+
+.detail-btn{
+    margin: 10px auto 0;
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg,#000000,#000000);
+    color: #fff;
+    font-size: 13px;
+    width: fit-content;
+    transition: 0.3s;
+}
+
+.card:hover .detail-btn{
+    background:linear-gradient(135deg,#000000,#e6e6e6);
+    transform:scale(1.05);
+}
+
+/* ===== Background effects ===== */
+.particles { position: fixed; inset:0; z-index:-2; overflow:hidden; }
+.particles span {
+    position:absolute; display:block; width:14px; height:14px; background: rgba(255,255,255,0.4);
+    border-radius:50%; animation: float 18s linear infinite; bottom:-20px;
+}
+.particles span:nth-child(1){ left:10%; animation-duration:20s; width:12px; height:12px;}
+.particles span:nth-child(2){ left:30%; animation-duration:15s; width:20px; height:20px;}
+.particles span:nth-child(3){ left:50%; animation-duration:22s; width:10px; height:10px;}
+.particles span:nth-child(4){ left:70%; animation-duration:18s; width:16px; height:16px;}
+.particles span:nth-child(5){ left:90%; animation-duration:25s; width:22px; height:22px;}
+@keyframes float {0%{transform:translateY(0) scale(1); opacity:0;}10%{opacity:0.6;}100%{transform:translateY(-110vh) scale(1.3);opacity:0;} }
+
+.sci-grid {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(79,172,254,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,172,254,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -3;
+    animation: gridMove 20s linear infinite;
+}
+@keyframes gridMove { from{background-position:0 0,0 0;} to{background-position:800px 800px,800px 800px;} }
+
+body.dark { 
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a); 
+}
+</style>
+</head>
+
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+    <div class="dark-btn" onclick="toggleDark()">☀︎</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</div>
+
+<!-- Side menu -->
+<div class="side-menu" id="sideMenu">
+    <h3>Menu</h3>
+
+    <div class="menu-item">
+        <div class="menu-header" onclick="toggleSubmenu('m5')">
+            <div class="menu-left"><span class="icon">★</span><span>มัธยมศึกษาปีที่ 5</span></div>
+            <span class="chevron" id="arrow-m5">›</span>
+        </div>
+        <div class="submenu" id="m5">
+            <a href="M5_observation.html">✦ Observation</a>
+            <a href="M5_competition.html">✦ Competition</a>
+        </div>
+    </div>
+
+    <div class="menu-item">
+        <div class="menu-header" onclick="toggleSubmenu('m4')">
+            <div class="menu-left"><span class="icon">★</span><span>มัธยมศึกษาปีที่ 4</span></div>
+            <span class="chevron" id="arrow-m4">›</span>
+        </div>
+        <div class="submenu" id="m4">
+            <a href="M4_observation.html">✦ Observation</a>
+            <a href="M4_competition.html">✦ Competition</a>
+        </div>
+    </div>
+
+    <a href="posn.html" class="menu-link"><div class="menu-left"><span class="icon">★</span><span>ผลงาน สอวน</span></div></a>
+    <a href="first_page.html" class="menu-link"><div class="menu-left"><span class="icon">★</span><span>Home</span></div></a>
+</div>
+
+<div class="banner">
+    <h1>ผลงานสอวน. ของนักเรียนHT</h1>
+</div>
+
+<!-- CARD SECTION -->
+<div class="container">
+    <div class="grid">
+
+        <div class="card">
+             <a href="https://www.instagram.com/p/DOZx7c6E0U6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="card-link">
+             <img src="pn (6).jpg" alt="">
+            <div class="card-body">
+             <h3>โครงการโอริมปิกวิชาการ สอวน. ค่าย1 วิชาภูมิสาสตร์ </h3>
+             <h4> นาย ศุภกร สุมโนทยาน</h4>
+             <span class="detail-btn">ดูรายละเอียด</span>
+            </div>
+             </a>
+        </div>
+
+        <div class="card">
+             <a href="https://www.instagram.com/p/DOvGMsuDx2w/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="card-link">
+             <img src="1.jpg" alt="">
+            <div class="card-body">
+             <h3>โครงการโอริมปิกวิชาการ สอวน. ค่าย1 วิชาชีววิทยา </h3>
+             <h4> นาย วงศ์วริศ จิระพิชชานันท์</h4>
+             <span class="detail-btn">ดูรายละเอียด</span>
+            </div>
+             </a>
+        </div>
+
+        <div class="card">
+             <a href="https://www.instagram.com/p/DOvGMsuDx2w/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="card-link">
+             <img src="pn (1).jpg" alt="">
+            <div class="card-body">
+             <h3>โครงการโอริมปิกวิชาการ สอวน. ค่าย1 วิชาชีววิทยา </h3>
+             <h4> นาย ภพธรรม โสธรนพบุตร</h4>
+             <span class="detail-btn">ดูรายละเอียด</span>
+            </div>
+             </a>
+        </div>
+
+        <div class="card">
+             <a href="https://www.instagram.com/p/DOvGMsuDx2w/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="card-link">
+             <img src="pn (4).jpg" alt="">
+            <div class="card-body">
+             <h3>โครงการโอริมปิกวิชาการ สอวน. ค่าย1 วิชาชีววิทยา </h3>
+             <h4> นางสาว รวิษฎา ศรีม่วง</h4>
+             <span class="detail-btn">ดูรายละเอียด</span>
+            </div>
+             </a>
+        </div>
+
+        <div class="card">
+             <a href="https://www.instagram.com/p/DOvGMsuDx2w/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="card-link">
+             <img src="pn (3).jpg" alt="">
+            <div class="card-body">
+             <h3>โครงการโอริมปิกวิชาการ สอวน. ค่าย1 วิชาคอมพิวเตอร์ </h3>
+             <h4> นางสาว อริสรา เอื้อสุขอารี</h4>
+             <span class="detail-btn">ดูรายละเอียด</span>
+            </div>
+             </a>
+        </div>
+
+        <div class="card">
+             <a href="https://www.instagram.com/p/DOvGMsuDx2w/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="card-link">
+             <img src="pn (5).jpg" alt="">
+            <div class="card-body">
+             <h3>โครงการโอริมปิกวิชาการ สอวน. ค่าย1 วิชาคอมพิวเตอร์ </h3>
+             <h4> นาย สุรทัย ขําวิจิตร และ นาย สุทธิพัฒน์ ขําวิจิตร</h4>
+             <span class="detail-btn">ดูรายละเอียด</span>
+            </div>
+             </a>
+        </div>
+        
+        <div class="card">
+             <a href="https://www.instagram.com/p/DOvGMsuDx2w/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="card-link">
+             <img src="pn (2).jpg" alt="">
+            <div class="card-body">
+             <h3>โครงการโอริมปิกวิชาการ สอวน. ค่าย1 วิชาดาราศาสตร์ </h3>
+             <h4> นาย ธนอรรถ สุขวงศ์  </h4>
+             <span class="detail-btn">ดูรายละเอียด</span>
+            </div>
+             </a>
+        </div>
+    </div>
+</div>
+
+<!-- Background -->
+<div class="particles"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="sci-grid"></div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+}
+
+function toggleSubmenu(id) {
+    const submenu = document.getElementById(id);
+    const arrow = document.getElementById("arrow-" + id);
+
+    if (submenu.style.maxHeight) {
+        submenu.style.maxHeight = null;
+        arrow.style.transform = "rotate(0deg)";
+    } else {
+        submenu.style.maxHeight = submenu.scrollHeight + "px";
+        arrow.style.transform = "rotate(90deg)";
+    }
+}
+
+function toggleDark() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

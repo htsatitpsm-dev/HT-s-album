@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HT's Album</title>
+<style>
+:root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --text: #111;
+    --subtext: #555;
+    --hover: #f1f1f1; 
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+body.dark {
+    --bg: #0f0f0f;
+    --card: #1a1a1a;
+    --text: #f5f5f5;
+    --subtext: #aaa;
+    --hover: #2a2a2a;
+    --shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+    overflow-x: hidden;
+}
+
+/* Top bar */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 20px;
+    display: flex;
+    gap: 16px;
+    z-index: 1000;
+} 
+
+.menu-btn, .dark-btn {
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.lang-btn {
+    font-size: 16px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    background: var(--card);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: 0.2s;
+}
+
+.lang-btn:hover {
+    background: var(--hover);
+}
+
+/* Side menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 270px;
+    height: 100vh;
+    background: var(--card);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+    padding: 30px 20px;
+    transition: right 0.35s cubic-bezier(.4,0,.2,1);
+    z-index: 999;
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+    
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Menu styles */
+.menu-item, .menu-link {
+    margin-bottom: 10px;
+}
+
+.menu-header, .menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.menu-header:hover, .menu-link:hover {
+    background: var(--hover);
+}
+
+.menu-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 18px;
+}
+
+.chevron {
+    font-size: 18px;
+    color: var(--subtext);
+    transition: transform 0.3s ease;
+}
+
+/* Submenu */
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    padding-left: 20px;
+}
+
+.submenu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    margin-top: 6px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--subtext);
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.submenu a:hover {
+    background: var(--hover);
+}
+
+/* Main content */
+.main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+/* Hero Card */
+.hero-card {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(14px);
+    padding: 50px 40px;
+    border-radius: 28px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    max-width: 900px;
+    width: 100%;
+    animation: fadeUp 1s ease both;
+}
+
+.hero-card h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #4facfe, #104a87);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-card p {
+    margin-top: 8px;
+    margin-bottom: 35px;
+    color: #777;
+    font-size: 16px;
+}
+
+/* Accent line */
+.hero-card::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin: 25px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #4facfe, #085a5f);
+}
+
+/* IG style images */
+.imgIG {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.imgIG a {
+    perspective: 800px;
+}
+
+.imgIG img {
+    width: 150px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.imgIG img:hover {
+    transform: translateY(-10px) scale(1.08) rotateX(6deg) rotateY(-6deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Particles */
+.particles { position: fixed; inset:0; z-index:-2; overflow:hidden; }
+.particles span {
+    position:absolute; display:block; width:14px; height:14px; background: rgba(255,255,255,0.4);
+    border-radius:50%; animation: float 18s linear infinite; bottom:-20px;
+}
+.particles span:nth-child(1){ left:10%; animation-duration:20s; width:12px; height:12px;}
+.particles span:nth-child(2){ left:30%; animation-duration:15s; width:20px; height:20px;}
+.particles span:nth-child(3){ left:50%; animation-duration:22s; width:10px; height:10px;}
+.particles span:nth-child(4){ left:70%; animation-duration:18s; width:16px; height:16px;}
+.particles span:nth-child(5){ left:90%; animation-duration:25s; width:22px; height:22px;}
+@keyframes float {0%{transform:translateY(0) scale(1); opacity:0;}10%{opacity:0.6;}100%{transform:translateY(-110vh) scale(1.3);opacity:0;}}
+
+/* Sci-fi Grid */
+.sci-grid {
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(79,172,254,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,172,254,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -3;
+    animation: gridMove 20s linear infinite;
+}
+@keyframes gridMove { from{background-position:0 0,0 0;} to{background-position:800px 800px,800px 800px;} }
+
+/* DNA animation */
+.dna {
+    position: fixed; inset:0; display:flex; justify-content:center; align-items:center; z-index:-1;
+}
+.dna span {
+    display:block; width:6px; height:80px; margin:0 4px; background: linear-gradient(180deg,#4facfe,#00f2fe);
+    border-radius:4px; animation: dnaWave 1.2s infinite alternate ease-in-out;
+}
+.dna span:nth-child(2){animation-delay:0.2s;}
+.dna span:nth-child(3){animation-delay:0.4s;}
+.dna span:nth-child(4){animation-delay:0.6s;}
+.dna span:nth-child(5){animation-delay:0.8s;}
+.dna span:nth-child(6){animation-delay:1s;}
+@keyframes dnaWave { from{transform:scaleY(0.5);} to{transform:scaleY(1.5);} }
+
+/* Dark mode support */
+body.dark {
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+}
+.dark-btn{
+    font-size: 30px;
+}
+body.dark .hero-card { background: rgba(30,30,30,0.75); }
+body.dark .hero-card p { color:#aaa; }
+body.dark .particles span { background: rgba(255,255,255,0.15); }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+    <div class="dark-btn" onclick="toggleDark()">☀︎</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="lang-btn" onclick="setLang('en')">EN</div>
+    <div class="lang-btn" onclick="setLang('th')">TH</div>
+</div>
+
+<div class="side-menu" id="sideMenu">
+    <h3>Menu</h3>
+
+    <!-- contact -->
+    <div class="menu-item">
+
+        <div class="imgIG">
+            <a href="https://www.instagram.com/sci.spsm" target="_blank">
+                <img src="sci.png" alt="sci.spsm">
+            </a>
+            <a href="https://www.instagram.com/ht01.spsm" target="_blank">
+                <img src="ht01.spsm_qr.jpg" alt="ht01.spsm">
+            </a>
+            <a href="https://www.instagram.com/healthtech02diwa" target="_blank">
+                <img src="healthtech02diwa_qr.jpg" alt="healthtech02diwa">
+            </a>
+            <a href="https://line.me/ti/g2/I-TFNRLY4eQPPUi7t2JCkJX6JkgPDm7IipBZlA" target="_blank">
+                <img src="QrCode.jpg" alt="OpenChat">
+            </a>
+        </div>
+    </div>
+
+    
+</div>
+
+<!-- Main content -->
+<div class="main">
+        <div class="hero-card">
+        <h1 data-lang="head">HT's อัลบั้ม</h1>
+        <p data-lang="des">Health Tech • วิทยาศาสตร์ • การศึกษาดูงาน • การแข่งขัน • โครงการโอลิมปิกวิชาการ</p>
+
+        <div class="menu-header" onclick="toggleSubmenu('6')">
+            <div class="menu-left">
+                <span class="icon">★</span>
+                <span data-lang="level6">มัธยมศึกษาปีที่ 6 </span>
+            </div>
+            <span class="chevron" id="arrow-6">›</span>
+        </div>
+        <div class="submenu" id="6">
+            <a href="01_observation.html" target="_blank" data-lang="obs">✦ Observation</a>
+        </div>
+
+        <div class="menu-header" onclick="toggleSubmenu('5')">
+            <div class="menu-left">
+                <span class="icon">★</span>
+                <span data-lang="level5">มัธยมศึกษาปีที่ 5 </span>
+            </div>
+            <span class="chevron" id="arrow-5">›</span>
+        </div>
+        <div class="submenu" id="5">
+            <a href="02_observation.html" target="_blank" data-lang="obs">✦ Observation</a>
+        </div>
+        
+        <div class="menu-header" onclick="toggleSubmenu('4')">
+            <div class="menu-left">
+                <span class="icon">★</span>
+                <span data-lang="level4">มัธยมศึกษาปีที่ 4 </span>
+            </div>
+            <span class="chevron" id="arrow-4">›</span>
+        </div>
+        <div class="submenu" id="4">
+            <a href="03_observation.html" target="_blank" data-lang="obs">✦ Observation</a>
+        </div>
+
+        <!-- Major Subject Instruction -->
+         <div class="menu-header" onclick="toggleSubmenu('HT')">
+            <div class="menu-left">
+                <span class="icon">★</span>
+                <span data-lang="major">การจัดการเรียนการสอน วิชาเอก </span>
+            </div>
+            <span class="chevron" id="arrow-HT">›</span>
+        </div>
+        <div class="submenu" id="HT">
+            <a href="https://heyzine.com/flip-book/c1f1f7cc6b.html" target="_blank" data-lang="dtmed"> ✦ แนวคิดนวัตกรรมทางการแพทย์</a>
+            <a href="https://heyzine.com/flip-book/9fdf113b43.html" target="_blank" data-lang="obsci"> ✦ สัมนาทางวิทยาศาสตร์</a>
+            <a href="https://heyzine.com/flip-book/2b7444f49f.html" target="_blank" data-lang="bsinno"> ✦ พื้นฐานนวัตกรรม</a>
+        </div>
+        
+     <a href="competition.html" class="menu-link">
+        <div class="menu-left">
+            <span class="icon">★</span>
+            <span data-lang="com">ผลงานแข่งขัน</span>
+        </div>
+    </a>
+
+    <a href="posn.html" class="menu-link">
+        <div class="menu-left">
+            <span class="icon">★</span>
+            <span data-lang="posn">ผลงาน สอวน</span>
+        </div>
+    </a>
+
+<!-- Background effects -->
+<div class="particles">
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+<div class="sci-grid"></div>
+<div class="dna">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("active");
+}
+
+function toggleSubmenu(id) {
+    const submenu = document.getElementById(id);
+    const arrow = document.getElementById("arrow-" + id);
+
+    if (submenu.style.maxHeight) {
+        submenu.style.maxHeight = null;
+        arrow.style.transform = "rotate(0deg)";
+    } else {
+        submenu.style.maxHeight = submenu.scrollHeight + "px";
+        arrow.style.transform = "rotate(90deg)";
+    }
+}
+
+function toggleDark() {
+    document.body.classList.toggle("dark");
+}
+
+</script>
+<script src="lang.js"></script>
+</body>
+</html>
