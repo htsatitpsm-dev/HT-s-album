@@ -40,8 +40,12 @@ const LANG = {
         obsci: "✦สัมนาทางวิทยาศาสตร์",
         bsinno: "✦พื้นฐานนวัตกรรม",
         drone4: "หนูน้อยเจ้าเวหา 4",
-        km1: "คณะวิศวกรรมการบินและอวกาศ หลักสูตรiddp ม.เกษตร",
+        kml: "คณะวิศวกรรมการบินและอวกาศ หลักสูตรiddp ม.เกษตร",
         ku: "คณะวิศวกรรมเครื่องยนต์การบิน-อวกาศ สถาบันเทคโนโลยีอวกาศนานาชาติเพื่อการพัฒนาเศรษฐกิจ มจพ.",
+        appc: "การสร้าง app เก็บข้อมูลโรงฐานและการใช้ความสามารถของ AI ผ่านเว็บไซต์ “robloflow”",
+        chi: "ค่ายแลกเปลี่ยนวัฒนธรรมที่โรงเรียนสาธิตฯ ชุมชนการเรียนรู้สมเด็จย่า",
+        tao: "หอดูดาวแห่งชาติ",
+        red: "ศึกษาดูงานด้านวิศวกรรมระบบรางและเทคโนโลยีระบบขนส่งทางราง ณ ศูนย์ซ่อมบำรุงรถไฟฟ้าสายสีแดง",
     },
     en: {
         head: "HT's Album",
@@ -85,7 +89,12 @@ const LANG = {
         bsinno: "✦Fundamentals of Innovation",
         drone4: "Drone Mission 4",
         ku: "International Double Degree Program (IDDP) in Aerospace Engineering and Business Management",
-        km1: "Bachelor of Engineering Program in Aerospace Propulsion Engineering",
+        kml: "Bachelor of Engineering Program in Aerospace Propulsion Engineering",
+        appc: "Development of Data Collection Applications and the Use of AI Capabilities through the Roboflow Platform",
+        chi: "Cultural Exchange Camp at Princess Mother Learning Community Demonstration School, Bodhivijjalaya College, SWU, Mae Chaem",
+        tao: "National Observatory (Thailand)",
+        red: "Study Visit on Railway Engineering and Rail Transportation Technology at the Red Line Electric Train Maintenance Center",
+        
     }
 };
 
