@@ -40,6 +40,8 @@ const LANG = {
         obsci: "✦สัมนาทางวิทยาศาสตร์",
         bsinno: "✦พื้นฐานนวัตกรรม",
         drone4: "หนูน้อยเจ้าเวหา 4",
+        km1: "คณะวิศวกรรมการบินและอวกาศ หลักสูตรiddp ม.เกษตร",
+        ku: "คณะวิศวกรรมเครื่องยนต์การบิน-อวกาศ สถาบันเทคโนโลยีอวกาศนานาชาติเพื่อการพัฒนาเศรษฐกิจ มจพ.",
     },
     en: {
         head: "HT's Album",
@@ -82,6 +84,8 @@ const LANG = {
         obsci: "✦Scientific Seminars",
         bsinno: "✦Fundamentals of Innovation",
         drone4: "Drone Mission 4",
+        ku: "International Double Degree Program (IDDP) in Aerospace Engineering and Business Management",
+        km1: "Bachelor of Engineering Program in Aerospace Propulsion Engineering",
     }
 };
 
