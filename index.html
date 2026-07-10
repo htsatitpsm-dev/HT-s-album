@@ -238,8 +238,23 @@ body {
 
 /* Particles */
 .particles {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.particles::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background-image: url('bg.jpg');
-    opacity: 0.6;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center calc(50% + 100px);
+
+    opacity: 0.3; /* ปรับความโปร่งใสของรูปได้ตรงนี้ */
+    z-index: -1;
 }
 .particles { position: fixed; inset:0; z-index:-2; overflow:hidden; }
 .particles span {
