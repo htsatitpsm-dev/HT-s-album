@@ -254,33 +254,51 @@ body.dark {
 </div>
 
 <!-- Side menu -->
+<!-- Side menu -->
 <div class="side-menu" id="sideMenu">
     <h3>Menu</h3>
 
     <div class="menu-item">
-        <div class="menu-header" onclick="toggleSubmenu('m5')">
-            <div class="menu-left"><span class="icon">★</span><span>มัธยมศึกษาปีที่ 5</span></div>
-            <span class="chevron" id="arrow-m5">›</span>
+        <div class="menu-header" onclick="toggleSubmenu('6')">
+            <div class="menu-left">
+                <span class="icon">★</span>
+                <span data-lang="level6">มัธยมศึกษาปีที่ 6</span>
+            </div>
+            <span class="chevron" id="arrow-6">›</span>
         </div>
-        <div class="submenu" id="m5">
-            <a href="M5_observation.html">✦ Observation</a>
-            <a href="M5_competition.html">✦ Competition</a>
+        <div class="submenu" id="6">
+            <a href="01_observation.html" data-lang="obs">✦ Observation</a>
         </div>
     </div>
 
     <div class="menu-item">
-        <div class="menu-header" onclick="toggleSubmenu('m4')">
-            <div class="menu-left"><span class="icon">★</span><span>มัธยมศึกษาปีที่ 4</span></div>
-            <span class="chevron" id="arrow-m4">›</span>
+        <div class="menu-header" onclick="toggleSubmenu('5')">
+            <div class="menu-left">
+                <span class="icon">★</span>
+                <span data-lang="level5">มัธยมศึกษาปีที่ 5</span>
+            </div>
+            <span class="chevron" id="arrow-5">›</span>
         </div>
-        <div class="submenu" id="m4">
-            <a href="M4_observation.html">✦ Observation</a>
-            <a href="M4_competition.html">✦ Competition</a>
+        <div class="submenu" id="5">
+            <a href="02_observation.html" data-lang="obs">✦ Observation</a>
         </div>
     </div>
 
-    <a href="posn.html" class="menu-link"><div class="menu-left"><span class="icon">★</span><span>ผลงาน สอวน</span></div></a>
-    <a href="first_page.html" class="menu-link"><div class="menu-left"><span class="icon">★</span><span>Home</span></div></a>
+    <div class="menu-item">
+        <div class="menu-header" onclick="toggleSubmenu('4')">
+            <div class="menu-left">
+                <span class="icon">★</span>
+                <span data-lang="level4">มัธยมศึกษาปีที่ 4</span></div>
+            <span class="chevron" id="arrow-4">›</span>
+        </div>
+        <div class="submenu" id="4">
+            <a href="03_observation.html" data-lang="obs">✦ Observation</a>
+        </div>
+    </div>
+
+    <a href="posn.html" class="menu-link"><div class="menu-left"><span class="icon">★</span><span data-lang="posn">ผลงาน สอวน</span></div></a>
+    <a href="competition.html" class="menu-link"><div class="menu-left"><span class="icon">★</span><span data-lang="com">ผลงานแข่งขัน</span></div></a>
+    <a href="index.html" class="menu-link"><div class="menu-left"><span class="icon">★</span><span data-lang="home">Home</span></div></a>
 </div>
 
 <div class="banner">
